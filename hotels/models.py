@@ -2,8 +2,8 @@ from django.db import models
 
 class Hotel(models.Model):
     name         = models.CharField(max_length=100)
-    latitude     = models.DecimalField(max_digits=10, decimal_places=4)
-    longitude    = models.DecimalField(max_digits=10, decimal_places=4)
+    latitude     = models.DecimalField(max_digits=10, decimal_places=6)
+    longitude    = models.DecimalField(max_digits=10, decimal_places=6)
     locations_id = models.ForeignKey('Location', on_delete=models.CASCADE)
 
     class Meta:
@@ -55,8 +55,6 @@ class RoomImage(models.Model):
 class RoomType(models.Model):
     type        = models.CharField(max_length=30)
     price       = models.DecimalField(max_digits=10, decimal_places=2)
-    description = models.TextField()
-    tag         = models.CharField(max_length=50)
 
     class Meta:
         db_table = 'room_types'
