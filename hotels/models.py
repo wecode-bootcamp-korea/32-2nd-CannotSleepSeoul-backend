@@ -1,25 +1,19 @@
 from django.db import models
 
 class Hotel(models.Model):
-    name         = models.CharField(max_length=100)
-    latitude     = models.DecimalField(max_digits=10, decimal_places=6)
-    longitude    = models.DecimalField(max_digits=10, decimal_places=6)
-    locations_id = models.ForeignKey('Location', on_delete=models.CASCADE)
-
-    class Meta:
-        db_table = 'hotels'
-
-class HotelDescription(models.Model):
+    name          = models.CharField(max_length=100)
+    latitude      = models.DecimalField(max_digits=10, decimal_places=6)
+    longitude     = models.DecimalField(max_digits=10, decimal_places=6)
     introduction  = models.TextField()
     using_time    = models.CharField(max_length=50)
     facilities    = models.CharField(max_length=50)
     service       = models.CharField(max_length=50)
     information   = models.TextField()
     refund_policy = models.CharField(max_length=50)
-    hotels_id     = models.ForeignKey('Hotel', on_delete=models.CASCADE)
+    locations_id  = models.ForeignKey('Location', on_delete=models.CASCADE)
 
     class Meta:
-        db_table = 'hotel_description'
+        db_table = 'hotels'
 
 class Location(models.Model):
     city      = models.CharField(max_length=10)
@@ -40,14 +34,14 @@ class HotelImage(models.Model):
 class Room(models.Model):
     available_date_start = models.DateField()
     available_date_end   = models.DateField()
-    hotels_id            = models.ForeignKey('Hotel', on_delete=models.CASCADE)
+    hotels_id            = models.ForeignKey('hotels.Hotel', on_delete=models.CASCADE)
 
     class Meta:
         db_table = 'rooms'
 
 class RoomImage(models.Model):
     image_url = models.CharField(max_length=200)
-    rooms_id  = models.ForeignKey('Room', on_delete=models.CASCADE)
+    rooms_id  = models.ForeignKey('hotels.Room', on_delete=models.CASCADE)
 
     class Meta:
         db_table = 'room_images'
