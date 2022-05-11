@@ -1,6 +1,3 @@
-import email
-from operator import mod
-from unicodedata import name
 from django.db    import models
 from cores.models import TimeStamp
 
