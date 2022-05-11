@@ -2,7 +2,7 @@ from django.db    import models
 from cores.models import TimeStamp
 
 class User(TimeStamp):
-    kakao_id          = models.CharField(max_length=100)
+    kakao_id          = models.BigIntegerField()
     name              = models.CharField(max_length=10, null=True)
     email             = models.CharField(max_length=100, null=True)
     password          = models.CharField(max_length=50, null=True)
