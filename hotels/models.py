@@ -2,13 +2,24 @@ from django.db import models
 
 class Hotel(models.Model):
     name         = models.CharField(max_length=100)
-    description  = models.TextField()
-    latitude     = models.DecimalField(max_digits=8, decimal_places=3)
-    longitude    = models.DecimalField(max_digits=8, decimal_places=3)
+    latitude     = models.DecimalField(max_digits=10, decimal_places=4)
+    longitude    = models.DecimalField(max_digits=10, decimal_places=4)
     locations_id = models.ForeignKey('Location', on_delete=models.CASCADE)
 
     class Meta:
         db_table = 'hotels'
+
+class HotelDescription(models.Model):
+    introduction  = models.TextField()
+    using_time    = models.CharField(max_length=50)
+    facilities    = models.CharField(max_length=50)
+    service       = models.CharField(max_length=50)
+    information   = models.TextField()
+    refund_policy = models.CharField(max_length=50)
+    hotels_id     = models.ForeignKey('Hotel', on_delete=models.CASCADE)
+
+    class Meta:
+        db_table = 'hotel_description'
 
 class Location(models.Model):
     city      = models.CharField(max_length=10)
