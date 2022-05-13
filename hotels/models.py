@@ -10,23 +10,23 @@ class Hotel(models.Model):
     service       = models.CharField(max_length=50)
     information   = models.TextField()
     refund_policy = models.CharField(max_length=50)
-    locations_id  = models.ForeignKey('Location', on_delete=models.CASCADE)
+    location      = models.ForeignKey('Location', on_delete=models.CASCADE)
 
     class Meta:
         db_table = 'hotels'
 
 class Location(models.Model):
-    city      = models.CharField(max_length=10)
-    gu        = models.CharField(max_length=10)
-    ro        = models.CharField(max_length=20)
-    detail    = models.CharField(max_length=30)
+    city   = models.CharField(max_length=10)
+    gu     = models.CharField(max_length=10)
+    ro     = models.CharField(max_length=20)
+    detail = models.CharField(max_length=30)
 
     class Meta:
         db_table = 'locations'
 
 class HotelImage(models.Model):
     image_url = models.CharField(max_length=200)
-    hotels_id = models.ForeignKey('Hotel', on_delete=models.CASCADE)
+    hotel     = models.ForeignKey('Hotel', on_delete=models.CASCADE)
 
     class Meta:
         db_table = 'hotel_images'
@@ -34,21 +34,21 @@ class HotelImage(models.Model):
 class Room(models.Model):
     available_date_start = models.DateField()
     available_date_end   = models.DateField()
-    hotels_id            = models.ForeignKey('hotels.Hotel', on_delete=models.CASCADE)
-
+    hotel                = models.ForeignKey('hotels.Hotel', on_delete=models.CASCADE)
+    room_type            = models.ForeignKey('RoomType', on_delete=models.CASCADE)
     class Meta:
         db_table = 'rooms'
 
 class RoomImage(models.Model):
     image_url = models.CharField(max_length=200)
-    rooms_id  = models.ForeignKey('hotels.Room', on_delete=models.CASCADE)
+    room      = models.ForeignKey('hotels.Room', on_delete=models.CASCADE)
 
     class Meta:
         db_table = 'room_images'
 
 class RoomType(models.Model):
-    type        = models.CharField(max_length=30)
-    price       = models.DecimalField(max_digits=10, decimal_places=2)
+    type  = models.CharField(max_length=30)
+    price = models.DecimalField(max_digits=10, decimal_places=2)
 
     class Meta:
         db_table = 'room_types'
