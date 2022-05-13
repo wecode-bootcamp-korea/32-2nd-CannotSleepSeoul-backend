@@ -49,7 +49,7 @@ class Migration(migrations.Migration):
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('available_date_start', models.DateField()),
                 ('available_date_end', models.DateField()),
-                ('hotels_id', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='hotels.hotel')),
+                ('hotel', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='hotels.hotel')),
             ],
             options={
                 'db_table': 'rooms',
@@ -71,7 +71,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('image_url', models.CharField(max_length=200)),
-                ('rooms_id', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='hotels.room')),
+                ('room', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='hotels.room')),
             ],
             options={
                 'db_table': 'room_images',
@@ -82,7 +82,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('image_url', models.CharField(max_length=200)),
-                ('hotels_id', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='hotels.hotel')),
+                ('hotel', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='hotels.hotel')),
             ],
             options={
                 'db_table': 'hotel_images',
@@ -90,7 +90,7 @@ class Migration(migrations.Migration):
         ),
         migrations.AddField(
             model_name='hotel',
-            name='locations_id',
+            name='location',
             field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='hotels.location'),
         ),
     ]

@@ -23,8 +23,8 @@ class Migration(migrations.Migration):
                 ('description', models.CharField(max_length=1000)),
                 ('rating', models.DecimalField(decimal_places=1, max_digits=3, null=True)),
                 ('deleted_at', models.DateTimeField(null=True)),
-                ('hotels_id', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='hotels.hotel')),
-                ('users_id', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='users.user')),
+                ('hotel', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='hotels.hotel')),
+                ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='users.user')),
             ],
             options={
                 'db_table': 'reviews',
@@ -35,7 +35,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('image_url', models.CharField(max_length=200, null=True)),
-                ('reviews_id', models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, to='reviews.review')),
+                ('review', models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, to='reviews.review')),
             ],
             options={
                 'db_table': 'review_images',
