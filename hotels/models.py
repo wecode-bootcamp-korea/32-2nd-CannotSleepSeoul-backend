@@ -5,11 +5,11 @@ class Hotel(models.Model):
     latitude      = models.DecimalField(max_digits=10, decimal_places=6)
     longitude     = models.DecimalField(max_digits=10, decimal_places=6)
     introduction  = models.TextField()
-    using_time    = models.CharField(max_length=50)
-    facilities    = models.CharField(max_length=50)
-    service       = models.CharField(max_length=50)
+    using_time    = models.CharField(max_length=100)
+    facilities    = models.CharField(max_length=100)
+    service       = models.CharField(max_length=100)
     information   = models.TextField()
-    refund_policy = models.CharField(max_length=50)
+    refund_policy = models.CharField(max_length=1000)
     location      = models.ForeignKey('Location', on_delete=models.CASCADE)
 
     class Meta:
@@ -36,6 +36,7 @@ class Room(models.Model):
     available_date_end   = models.DateField()
     hotel                = models.ForeignKey('hotels.Hotel', on_delete=models.CASCADE)
     room_type            = models.ForeignKey('RoomType', on_delete=models.CASCADE)
+    
     class Meta:
         db_table = 'rooms'
 
