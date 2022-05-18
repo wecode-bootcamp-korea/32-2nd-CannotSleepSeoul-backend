@@ -1,23 +1,21 @@
 import json
 
-from django.shortcuts import render
+from django.views import View
+from django.http  import JsonResponse
 
-from json.decoder     import JSONDecodeError
+from hotels.models  import Hotel
+from reviews.models import Review
 
-from django.views     import View
-from django.http      import JsonResponse
-
-from hotels.models    import Hotel, HotelImage, Location, Room, RoomType
-from reviews.models   import Review
-from users.models     import User
 
 class ReviewView(View):
     def get(self, request, hotel_id):
+        
         if not Hotel.objects.filter(id=hotel_id).exists():
-            return JsonResponse({'message':'REVIEW_DOES_NOT_EXIST'}, status=404)
+            return JsonResponse({'message':'HOTEL_DOES_NOT_EXIST'}, status=404)
 
         review_list = [{
-            "name"      : User.objects.get(id=review.user.id).name,
+            "id"        : review.id,
+            "name"      : review.user.name,
             "rating"    : review.rating,
             "content"   : review.description,
             "create_at" : review.created_at
