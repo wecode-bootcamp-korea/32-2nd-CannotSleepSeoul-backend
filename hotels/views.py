@@ -1,18 +1,16 @@
 import json
 
-from django.shortcuts import render
+from django.views import View
+from django.http  import JsonResponse
 
-from django.views     import View
-from django.http      import JsonResponse
-
-from hotels.models    import Hotel, HotelImage, Location, Room, RoomType
+from hotels.models import Hotel
 
 class DetailView(View):
     def get(self, request, hotel_id):
         try:
-            hotels = Hotel.objects.filter(id=hotel_id)
+            hotel = Hotel.objects.get(id=hotel_id)
 
-            hotel_detail = [{
+            hotel_detail = {
                 'id'            : hotel.id,
                 'name'          : hotel.name,
                 'latitude'      : hotel.latitude,
@@ -27,16 +25,16 @@ class DetailView(View):
                 'gu'            : hotel.location.gu,
                 'ro'            : hotel.location.ro,
                 'detail'        : hotel.location.detail,
-                'image_url'     : hotel.hotelimage_set.filter(hotel_id=hotel.id)[0].image_url,
+                'image_url'     : hotel.hotelimage_set.all()[0].image_url, #[hotel.image_url for hotel in hotel.hotelimage_set.all()]
                 'room'          : [{
                     'room_id'              : room.id,
                     'available_date_start' : room.available_date_start,
                     'available_date_end'   : room.available_date_end,
                     'type'                 : room.room_type.type,
                     'price'                : room.room_type.price,
-                    'image_url'            : room.roomimage_set.filter(room_id=room.id)[0].image_url
-                    } for room in hotel.room_set.all()]
-            } for hotel in hotels]
+                    'image_url'            : room.roomimage_set.all()[0].image_url
+                } for room in hotel.room_set.all()]
+            }
 
         except Hotel.DoesNotExist:
             return JsonResponse({'message' : 'HOTEL_DOES_NOT_EXIST'}, status=404)
