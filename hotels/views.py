@@ -27,7 +27,7 @@ class DetailView(View):
                 'gu'            : hotel.location.gu,
                 'ro'            : hotel.location.ro,
                 'detail'        : hotel.location.detail,
-                'image_url'     : hotel.hotelimage_set.all()[0].image_url, #[hotel.image_url for hotel in hotel.hotelimage_set.all()]
+                'image_url'     : hotel.hotelimage_set.all()[0].image_url, 
                 'room'          : [{
                     'room_id'              : room.id,
                     'available_date_start' : room.available_date_start,
