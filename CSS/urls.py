@@ -16,5 +16,9 @@ Including another URLconf
 from django.urls import path, include
 
 urlpatterns = [
+<<<<<<< HEAD
     path('hotels',include("hotels.urls"))
+=======
+    path('users',include("users.urls"))
+>>>>>>> c11dba4 (Add: test.py)
 ]
